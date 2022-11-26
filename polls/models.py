@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.core.validators import FileExtensionValidator
+from django.contrib.auth.models import User
 
 
 def get_name_file(instance, filename):
@@ -47,3 +48,11 @@ class Choice(models.Model):
 #
 #     class Meta:
 #         ordering = ['name']
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+
+    def __str__(self):
+        return self.user.username
