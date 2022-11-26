@@ -1,16 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Профиль</title>
 </head>
-<h2>Профиль</h2>
 <body>
-    <ul>
-        <li>
-
-        </li>
-    </ul>
+<h2>Профиль: {{user.username}}</h2>
+<ul>
+    <li><p>Фамилия:</p> {{user.lastname}}</li>
+    <li>
+        <div>Аватар: {{Profile.avatar}}</div>
+    </li>
+    <li><p>Биография:</p> {{user.bio}}</li>
+</ul>
+<br>
+<br>
+<form>
+    <a href="{% url 'index' %}"><input type="button" value="На главную"></a>
+</form>
 </body>
 </html>
