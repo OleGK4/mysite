@@ -6,10 +6,10 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
-
+from PIL import Image
 
 def get_name_file(instance, filename):
-    return 'portal/file'.join([get_random_string(5) + '_' + filename])
+    return 'mysite/file'.join([get_random_string(5) + '_' + filename])
 
 
 class Question(models.Model):
@@ -49,10 +49,29 @@ class Choice(models.Model):
 #     class Meta:
 #         ordering = ['name']
 
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     img = models.ImageField(max_length=200, upload_to=get_name_file, blank=True, null=True,
+#                             validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'jpeg'])])
+#     bio = models.TextField()
+#
+#     def __str__(self):
+#         return self.user.username
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
-    bio = models.TextField()
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

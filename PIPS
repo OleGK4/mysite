@@ -1,2 +1,9 @@
 pip install django
 pip install Pillow
+pip install easy-thumbnails
+pip install django-crispy-forms
+
+
+
+
+https://proglib.io/p/django-s-nulya-chast-3-sozdanie-profiley-szhatie-izobrazheniy-crud-i-paginaciya-2022-06-10 - IMG для профиля
