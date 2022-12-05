@@ -21,6 +21,7 @@
     {% endfor %}
     {% else %}
     <li><a href="{% url 'polls:login' %}">Вход</a></li>
+    <li><a href="{% url 'polls:register' %}">Регистрация</a></li>
     {% endif %}
 </ul>
 {% else %}

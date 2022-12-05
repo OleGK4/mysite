@@ -8,7 +8,7 @@
 <body>
 <h1>{{ question.question_text }}</h1>
 <ul>
-    <li><a href="{% url 'profile' %}">Мой профиль</a></li>
+    <li><a href="{% url 'polls:profile' %}">Мой профиль</a></li>
 </ul>
 <ul>
     {% for choice in question.choice_set.all %}

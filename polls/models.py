@@ -8,7 +8,6 @@ from PIL import Image
 from django.contrib.auth.models import AbstractUser
 
 
-
 def get_name_file(instance, filename):
     return 'mysite/file'.join([get_random_string(5) + '_' + filename])
 

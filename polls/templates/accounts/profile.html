@@ -9,5 +9,12 @@
    {% else %}
        <p>Здравствуйте! </p>
    {% endif %}
-   <h3>Ваши объявления</h3>
+   <a href="{% url 'profile_change' %}">Изменить личные данные</a><br>
+   <a href="{% url 'password_change' %}">Изменить пароль</a><br>
+   <a href="{% url 'profile_delete' %}">Удалить профиль</a>
+<br>
+<br>
+<form>
+    <a href="{% url 'index' %}"><input type="button" value="На главную"></a>
+</form>
 {% endblock %}

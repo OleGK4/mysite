@@ -1,6 +1,10 @@
 from django import forms
 from .models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import password_validation
+from django.core.exceptions import ValidationError
+
+
 # from .models import Profile
 
 
@@ -13,12 +17,12 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    email = forms.EmailField(
+        label='Адрес электронной почты')
 
     class Meta:
         model = User
-        fields = ['username', 'email']
-
+        fields = ['username', 'email', 'first_name', 'last_name']
 
 # class ProfileUpdateForm(forms.ModelForm):
 #     class Meta:
