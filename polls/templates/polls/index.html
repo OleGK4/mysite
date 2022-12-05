@@ -8,13 +8,20 @@
 </head>
 <body>
 <h2>Главная</h2>
+{% if user.is_authenticated %}
 <ul>
-    <li><a href="{% url 'profile' %}">Мой профиль</a></li>
-</ul>
-<ul>
+    <li>User: {{ user.get_username }}</li>
+    <li><a href="{% url 'polls:profile' %}">Мой профиль</a></li>
+    <li><a href="{% url 'polls:logout' %}">Выход</a></li>
     {% for question in latest_question_list %}
+    <br>
     <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+    <p>{{question.question_short_description_text}}</p>
+    <br>
     {% endfor %}
+    {% else %}
+    <li><a href="{% url 'polls:login' %}">Вход</a></li>
+    {% endif %}
 </ul>
 {% else %}
 <p>

@@ -1,17 +1,34 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Question, Choice, Profile
+from .models import Question, Choice
 from django.template import loader
 from django.contrib import messages
 from django.urls import reverse
 from django.views import generic
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm
+# ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProfileView(generic.ListView):
-    model = Profile
-    template_name = 'polls/profile.html'
+class BBLogoutView(LoginRequiredMixin, LogoutView):
+    template_name = 'polls/logout.html'
+
+
+@login_required
+def profile(request):
+    return render(request, 'polls/profile.html')
+
+
+class BBLoginView(LoginView):
+    template_name = 'polls/login.html'
+
+
+# class ProfileView(generic.ListView):
+#     model = Profile
+#     template_name = 'polls/profile[old].html'
 
 
 class IndexView(generic.ListView):
@@ -59,26 +76,26 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Ваш профиль успешно обновлен.')
-            return redirect('profile')
-
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-
-    return render(request, 'users/profile.html', context)
+# @login_required
+# def profile(request):
+#     if request.method == 'POST':
+#         u_form = UserUpdateForm(request.POST, instance=request.user)
+#         p_form = ProfileUpdateForm(request.POST,
+#                                    request.FILES,
+#                                    instance=request.user.profile)
+#         if u_form.is_valid() and p_form.is_valid():
+#             u_form.save()
+#             p_form.save()
+#             messages.success(request, f'Ваш профиль успешно обновлен.')
+#             return redirect('profile')
+#
+#     else:
+#         u_form = UserUpdateForm(instance=request.user)
+#         p_form = ProfileUpdateForm(instance=request.user.profile)
+#
+#     context = {
+#         'u_form': u_form,
+#         'p_form': p_form
+#     }
+#
+#     return render(request, 'users/profile[old].html', context)
