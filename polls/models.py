@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 from PIL import Image
-from django.contrib.auth.models import AbstractUser
+
 
 
 def get_name_file(instance, filename):
