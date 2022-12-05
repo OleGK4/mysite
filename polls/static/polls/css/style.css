@@ -4,7 +4,7 @@
 ul{
     list-style: none;
 }
-ul > li > a{
+ul > li > a, a, ul > li, ul{
     text-decoration: none;
 }
 body{
