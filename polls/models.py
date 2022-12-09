@@ -16,6 +16,7 @@ class Question(models.Model):
     question_description_text = models.CharField(max_length=300, default="description")
     question_short_description_text = models.CharField(max_length=300, default="short description")
     pub_date = models.DateTimeField('date published')
+    photo = models.ImageField(upload_to='question_img', default='image')
 
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)

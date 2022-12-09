@@ -14,8 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import include, path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
@@ -23,6 +21,7 @@ from django.conf import settings
 from polls import views
 from polls.views import profile
 from polls.views import UserUpdateView, BBPasswordChangeView, DeleteUserView
+
 
 urlpatterns = [
     path('', include('polls.urls')),
@@ -35,7 +34,7 @@ urlpatterns = [
     path('accounts/profile/change/', UserUpdateView.as_view(), name='profile_change'),
     path('accounts/password/change/', BBPasswordChangeView.as_view(), name='password_change'),
     path('accounts/profile/', profile, name='profile'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += staticfiles_urlpatterns()
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

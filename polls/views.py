@@ -6,7 +6,7 @@ from django.template import loader
 from django.contrib import messages
 from django.urls import reverse
 from django.views import generic
-from .forms import UserRegisterForm, UserUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, AddQuestionPic
 # ProfileUpdateForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -16,6 +16,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+
+
+
+
 
 
 
