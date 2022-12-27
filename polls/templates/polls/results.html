@@ -14,9 +14,12 @@
 <ul>
     <li><a href="{% url 'polls:profile' %}">Мой профиль</a></li>
 </ul>
+    {% for i in question %}
+    <img src="{{ i.question.photo.url }}" alt="IMAGE">
+    {% endfor %}
 <ul>
     {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} {{ choice.votes }} vote{{choice.votes|pluralize}}</li>
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{choice.votes|pluralize}}</li>
     {% endfor %}
 </ul>
 <a href="{% url 'polls:detail'  question.id %}">Выбрать еще раз? </a>

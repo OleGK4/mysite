@@ -12,6 +12,9 @@
     {% csrf_token %}
     <fieldset>
         <legend>
+            {% for i in question %}
+            <img src="{{ i.question.photo.url }}" alt="IMAGE">
+            {% endfor %}
             <h1>{{question.question_text}}</h1>
             <p>{{question.question_description_text}}</p>
         </legend>

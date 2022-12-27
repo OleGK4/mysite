@@ -17,10 +17,12 @@
     <li><a href="{% url 'polls:profile' %}">Мой профиль</a></li>
     <li><a href="{% url 'polls:logout' %}">Выход</a></li>
     {% for question in latest_question_list %}
+    {% if question.was_published_recently %}
     <br>
     <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
     <p>{{question.question_short_description_text}}</p>
     <br>
+    {% endif %}
     {% endfor %}
     {% else %}
     <li><a href="{% url 'polls:login' %}">Вход</a></li>

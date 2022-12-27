@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 from .views import BBLoginView, profile, BBLogoutView, UserUpdateView, BBPasswordChangeView, RegisterUserView, RegisterDoneView, DeleteUserView
@@ -16,4 +18,4 @@ urlpatterns = [
     path('accounts/register/', RegisterUserView.as_view(), name='register'),
     path('accounts/logout/', BBLogoutView.as_view(), name='logout'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
